@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Admin Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Sidebar styling */
+    .sidebar {
+      height: 100%;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #343a40;
+      padding-top: 20px;
+    }
+
+    /* Page content styling */
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+
+    /* Card styling */
+    .card {
+      margin-bottom: 20px;
+    }
+    .container
+    {
+        text-align: center;
+        justify-content: center;
+        
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2 class="text-white text-center">Admin Dashboard</h2>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Exams</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Students</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="#">Results</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Page Content -->
+  <div class="content">
+    <h2>Exam Statistics</h2>
+    <div class="row">
+      <!-- Card 1 -->
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Total Exams</h5>
+            <p class="card-text">25</p>
+          </div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Total Students</h5>
+            <p class="card-text">350</p>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Pass Percentage</h5>
+            <p class="card-text">85%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+        <h2 class="text-center my-4">Student Details</h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Roll No</th>
+              <th scope="col">Student Name</th>
+              <th scope="col">Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Manish Ambuse</td>
+              <td>90%</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Rahul Birajdar</td>
+              <td>89%</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Anupam Badure</td>
+              <td>88%</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+        <h2 class="text-center my-4">Student Status Pie Chart</h2>
+        <canvas id="pieChart" width="400" height="400"></canvas>
+      </div>
+
+  <script>
+    // Data for the pie chart
+    var data = {
+      labels: ['Passed', 'Failed', 'Absent'],
+      datasets: [{
+        data: [85, 10, 5], // Example data (replace with actual data)
+        backgroundColor: ['#28a745', '#dc3545', '#ffc107'] // Colors for each segment
+      }]
+    };
+
+    // Options for the pie chart
+    var options = {
+      responsive: false,
+      maintainAspectRatio: false
+    };
+
+    // Get the canvas element
+    var ctx = document.getElementById('pieChart').getContext('2d');
+
+    // Create the pie chart
+    var myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: data,
+      options: options
+    });
+  </script>
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

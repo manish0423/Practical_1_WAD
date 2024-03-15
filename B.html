@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Center all content */
+    .text-center
+    {
+      margin-bottom: 70px;
+    }
+    #all {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    table
+    {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+    <div id="all">
+
+        <div class="container">
+            <h2 class="text-center">Student Registration</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" class="form-control" id="number" name="number" placeholder="Mobile Number" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+
+            <hr>
+
+            <h2 class="text-center">Registered Students</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Mobile Number</th>
+                    <th>Email-ID</th>
+                </tr>
+                </thead>
+                <tbody id="userTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+  
+
+  <script>
+    // Function to display registered users in the table
+    function displayUsers() {
+      var users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+
+      var tableBody = document.getElementById('userTableBody');
+      tableBody.innerHTML = '';
+
+      users.forEach(function(user) {
+        var row = '<tr><td>' + user.username + '</td><td>' + user.password + '</td><td>' + user.number + '</td><td>' + user.email + '</td></tr>';
+        tableBody.innerHTML += row;
+      });
+    }
+
+    // Display registered users on page load
+    displayUsers();
+
+    // Event listener for registration form submission
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      var number = document.getElementById('number').value;
+      var email = document.getElementById('email').value;
+
+      // Get existing registered users from local storage or initialize an empty array
+      var users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+
+      // Add the new user to the array
+      users.push({ username: username, password: password , number:number , email:email });
+
+      // Store the updated array back in local storage
+      localStorage.setItem('registeredUsers', JSON.stringify(users));
+
+      // Clear the form fields
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('number').value = '';
+      document.getElementById('email').value = '';
+
+      // Update the table to display the new user
+      displayUsers();
+    });
+  </script>
+
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
